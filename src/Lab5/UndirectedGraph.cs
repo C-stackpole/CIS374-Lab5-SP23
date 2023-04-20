@@ -170,8 +170,6 @@ namespace Lab5
         /// as discovered by a DFS.</returns>
         public Dictionary<Node, Node> DFS(Node startingNode)
         {
-            ResetNodeColor();
-
             Dictionary<Node, Node> pred = new Dictionary<Node, Node>();
 
             //intialize nodes and pred dictionary
@@ -218,40 +216,6 @@ namespace Lab5
         {
             var resultDictionary = new Dictionary<Node, (Node pred, int dist)>();
 
-            //intialize dictionary
-            foreach(var node in Nodes)
-            {
-                node.Color = Color.White;
-                resultDictionary[node] = (null, int.MaxValue);
-            }
-
-            //starting node
-            startingNode.Color = Color.Gray;
-            resultDictionary[startingNode] = (null, 0);
-
-            //Q = empty queue
-            Queue<Node> queue = new Queue<Node>();
-            queue.Enqueue(startingNode);
-
-            //itertively traverse graph
-            while( queue.Count > 0)
-            {
-                //u = head(Q)
-                var node = queue.Peek();
-
-                foreach( var neighbor in node.Neighbors)
-                {
-                    if(neighbor.Color == Color.White)
-                    {
-                        int distance = resultDictionary[node].ToTuple().Item2;
-                        resultDictionary[neighbor] = (node, distance++);
-                        neighbor.Color = Color.Gray;
-                        queue.Enqueue(neighbor);
-                    }
-                }
-                queue.Dequeue();
-                node.Color = Color.Black;
-            }
             
             return resultDictionary;
         }
