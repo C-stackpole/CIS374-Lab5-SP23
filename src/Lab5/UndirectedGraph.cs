@@ -155,7 +155,11 @@ namespace Lab5
         {
             ResetNodeColor();
 
-            return false;
+            DFS(GetNodeByName(nodename1));
+
+            var node2 = GetNodeByName(nodename1);
+
+            return node2.Color == Color.Black;
         }
 
         // TODO
